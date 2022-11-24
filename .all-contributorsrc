@@ -447,91 +447,9 @@
       "contributions": [
         "code"
       ]
-    },
-    {
-      "login": "wdj82",
-      "name": "wdj82",
-      "avatar_url": "https://avatars.githubusercontent.com/u/37749088?v=4",
-      "profile": "https://github.com/wdj82",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "ssmkhrj",
-      "name": "Som Shekhar Mukherjee",
-      "avatar_url": "https://avatars.githubusercontent.com/u/49264891?v=4",
-      "profile": "https://github.com/ssmkhrj",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "DarkHorse1997",
-      "name": "Tanmoy Das",
-      "avatar_url": "https://avatars.githubusercontent.com/u/22052923?v=4",
-      "profile": "https://github.com/DarkHorse1997",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "maheshjag",
-      "name": "MJ",
-      "avatar_url": "https://avatars.githubusercontent.com/u/1705603?v=4",
-      "profile": "https://github.com/maheshjag",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "SherylHohman",
-      "name": "Sheryl Hohman",
-      "avatar_url": "https://avatars.githubusercontent.com/u/8204778?v=4",
-      "profile": "https://stackoverflow.com/users/5411817/sherylhohman?tab=topactivity",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "shahbaz17",
-      "name": "Mohammad Shahbaz Alam",
-      "avatar_url": "https://avatars.githubusercontent.com/u/6962565?v=4",
-      "profile": "http://mdsbzalam.dev",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "anabellaspinelli",
-      "name": "Anabella",
-      "avatar_url": "https://avatars.githubusercontent.com/u/7825875?v=4",
-      "profile": "https://github.com/anabellaspinelli",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "lsminter",
-      "name": "Lucas Minter",
-      "avatar_url": "https://avatars.githubusercontent.com/u/26470581?v=4",
-      "profile": "http://lucasminter.dev",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "leggsimon",
-      "name": "Simon Legg",
-      "avatar_url": "https://avatars.githubusercontent.com/u/11544418?v=4",
-      "profile": "https://github.com/leggsimon",
-      "contributions": [
-        "doc"
-      ]
     }
   ],
   "contributorsPerLine": 7,
   "repoHost": "https://github.com",
-  "skipCi": true,
-  "commitConvention": "angular"
+  "skipCi": true
 }
