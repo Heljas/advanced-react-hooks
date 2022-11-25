@@ -1,17 +1,17 @@
 // useLayoutEffect: auto-scrolling textarea
 // http://localhost:3000/isolated/exercise/04.tsx
 
-import * as React from 'react'
+import * as React from 'react';
 
-type Message = {id: string; author: string; content: string}
+type Message = {id: string; author: string; content: string};
 
 function MessagesDisplay({messages}: {messages: Array<Message>}) {
-  const containerRef = React.useRef<HTMLDivElement>(null)
-  // 🐨 replace useEffect with useLayoutEffect
-  React.useEffect(() => {
-    if (!containerRef.current) return
-    containerRef.current.scrollTop = containerRef.current.scrollHeight
-  })
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useLayoutEffect(() => {
+    if (!containerRef.current) return;
+    containerRef.current.scrollTop = containerRef.current.scrollHeight;
+  });
 
   return (
     <div ref={containerRef} role="log">
@@ -22,35 +22,35 @@ function MessagesDisplay({messages}: {messages: Array<Message>}) {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 // this is to simulate major computation/big rendering tree/etc.
 function sleep(time = 0) {
-  const wakeUpTime = Date.now() + time
+  const wakeUpTime = Date.now() + time;
   while (Date.now() < wakeUpTime) {}
 }
 
 function SlooooowSibling() {
   // try this with useLayoutEffect as well to see
   // how it impacts interactivity of the page before updates.
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     // increase this number to see a more stark difference
-    sleep(300)
-  })
-  return null
+    sleep(2500);
+  });
+  return null;
 }
 
 function App() {
-  const [messages, setMessages] = React.useState(allMessages.slice(0, 8))
+  const [messages, setMessages] = React.useState(allMessages.slice(0, 8));
   const addMessage = () =>
     messages.length < allMessages.length
       ? setMessages(allMessages.slice(0, messages.length + 1))
-      : null
+      : null;
   const removeMessage = () =>
     messages.length > 0
       ? setMessages(allMessages.slice(0, messages.length - 1))
-      : null
+      : null;
 
   return (
     <div className="messaging-app">
@@ -62,10 +62,10 @@ function App() {
       <MessagesDisplay messages={messages} />
       <SlooooowSibling />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 
 const allMessages: Array<Message> = [
   `Leia: Aren't you a little short to be a stormtrooper?`,
@@ -103,4 +103,4 @@ const allMessages: Array<Message> = [
   id: String(i),
   author: m.split(': ')[0],
   content: m.split(': ')[1],
-}))
+}));
