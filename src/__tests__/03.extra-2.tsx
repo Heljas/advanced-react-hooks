@@ -1,70 +1,70 @@
-import * as React from 'react'
-import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
-import {render, screen} from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import App from '../final/03.extra-2'
-// import App from '../exercise/03.extra-2'
+import * as React from 'react';
+import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils';
+import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+// import App from '../final/03.extra-2'
+import App from '../exercise/03.extra-2';
 
-const getFetchMock = () => jest.spyOn(window, 'fetch')
-const getErrorMock = () => jest.spyOn(console, 'error')
+const getFetchMock = () => jest.spyOn(window, 'fetch');
+const getErrorMock = () => jest.spyOn(console, 'error');
 let fetchMock: ReturnType<typeof getFetchMock>,
-  errorMock: ReturnType<typeof getErrorMock>
+  errorMock: ReturnType<typeof getErrorMock>;
 beforeEach(() => {
-  fetchMock = getFetchMock()
-  errorMock = getErrorMock()
-})
+  fetchMock = getFetchMock();
+  errorMock = getErrorMock();
+});
 
 afterEach(() => {
-  fetchMock.mockRestore()
-  errorMock.mockRestore()
-})
+  fetchMock.mockRestore();
+  errorMock.mockRestore();
+});
 
 test('displays the pokemon', async () => {
-  render(<App />)
-  const input = screen.getByLabelText(/pokemon/i)
-  const submit = screen.getByText(/^submit$/i)
+  render(<App />);
+  const input = screen.getByLabelText(/pokemon/i);
+  const submit = screen.getByText(/^submit$/i);
 
   // verify that an initial request is made when mounted
-  userEvent.type(input, 'pikachu')
-  userEvent.click(submit)
+  userEvent.type(input, 'pikachu');
+  userEvent.click(submit);
 
-  await screen.findByRole('heading', {name: /pikachu/i})
+  await screen.findByRole('heading', {name: /pikachu/i});
 
   // verify that a request is made when props change
-  userEvent.clear(input)
-  userEvent.type(input, 'ditto')
-  userEvent.click(submit)
+  userEvent.clear(input);
+  userEvent.type(input, 'ditto');
+  userEvent.click(submit);
 
-  await screen.findByRole('heading', {name: /ditto/i})
+  await screen.findByRole('heading', {name: /ditto/i});
 
   // verify that when props remain the same a request is not made
-  fetchMock.mockClear()
+  fetchMock.mockClear();
 
-  userEvent.click(submit)
+  userEvent.click(submit);
 
-  await screen.findByRole('heading', {name: /ditto/i})
+  await screen.findByRole('heading', {name: /ditto/i});
 
   alfredTip(
     () => expect(fetchMock).not.toHaveBeenCalled(),
     'Make certain that you are providing a dependencies list in useEffect!',
-  )
+  );
 
   // verify error handling
-  errorMock.mockImplementation(() => {})
+  errorMock.mockImplementation(() => {});
 
-  userEvent.clear(input)
-  userEvent.type(input, 'george')
-  userEvent.click(submit)
+  userEvent.clear(input);
+  userEvent.type(input, 'george');
+  userEvent.click(submit);
   expect(await screen.findByRole('alert')).toHaveTextContent(
     /There was an error.*Unsupported pokemon.*george/,
-  )
-  expect(errorMock).toHaveBeenCalledTimes(2)
+  );
+  expect(errorMock).toHaveBeenCalledTimes(2);
 
-  errorMock.mockReset()
-  fetchMock.mockClear()
+  errorMock.mockReset();
+  fetchMock.mockClear();
 
   // use the cached value
-  userEvent.click(screen.getByRole('button', {name: /ditto/i}))
-  expect(fetchMock).not.toHaveBeenCalled()
-  await screen.findByRole('heading', {name: /ditto/i})
-})
+  userEvent.click(screen.getByRole('button', {name: /ditto/i}));
+  expect(fetchMock).not.toHaveBeenCalled();
+  await screen.findByRole('heading', {name: /ditto/i});
+});
