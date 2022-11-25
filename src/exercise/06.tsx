@@ -1,49 +1,50 @@
 // useDebugValue: useMedia
 // http://localhost:3000/isolated/exercise/06.tsx
 
-import * as React from 'react'
+import * as React from 'react';
+
+const formatMediaDebugValue = ({query, state}) => `\`${query}\` => ${state}`;
 
 function useMedia(query: string, initialState = false) {
-  const [state, setState] = React.useState(initialState)
-  // 🐨 call React.useDebugValue here.
-  // 💰 here's the formatted label I use: `\`${query}\` => ${state}`
+  const [state, setState] = React.useState(initialState);
+  React.useDebugValue({query, state}, formatMediaDebugValue);
 
   React.useEffect(() => {
-    let current = true
-    const mql = window.matchMedia(query)
+    let current = true;
+    const mql = window.matchMedia(query);
     function onChange() {
       if (!current) {
-        return
+        return;
       }
-      setState(Boolean(mql.matches))
+      setState(Boolean(mql.matches));
     }
 
     // unfortunately, there's no polyfill for addEventListener on media queries
     // which we need for our jsdom-based tests. So we're using addListener here
-    mql.addListener(onChange)
-    setState(mql.matches)
+    mql.addListener(onChange);
+    setState(mql.matches);
 
     return () => {
-      current = false
+      current = false;
       // same issue with the removeListener as well
-      mql.removeListener(onChange)
-    }
-  }, [query])
+      mql.removeListener(onChange);
+    };
+  }, [query]);
 
-  return state
+  return state;
 }
 
 function Box() {
-  const isBig = useMedia('(min-width: 1000px)')
-  const isMedium = useMedia('(max-width: 999px) and (min-width: 700px)')
-  const isSmall = useMedia('(max-width: 699px)')
-  const color = isBig ? 'green' : isMedium ? 'yellow' : isSmall ? 'red' : null
+  const isBig = useMedia('(min-width: 1000px)');
+  const isMedium = useMedia('(max-width: 999px) and (min-width: 700px)');
+  const isSmall = useMedia('(max-width: 699px)');
+  const color = isBig ? 'green' : isMedium ? 'yellow' : isSmall ? 'red' : null;
 
-  return <div style={{width: 200, height: 200, backgroundColor: color}} />
+  return <div style={{width: 200, height: 200, backgroundColor: color}} />;
 }
 
 function App() {
-  return <Box />
+  return <Box />;
 }
 
-export default App
+export default App;
